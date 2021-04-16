@@ -442,17 +442,17 @@ guiTypes = {
 				position = { x = 262 y = 5 }
 				scale = 0.5
 			}
-			instantTextBoxType = {
-				name = "job_class_name"
-				position = { x = 285 y = 5 }
-				font = "cg_16b"
-				maxWidth = 170
-				maxHeight = 16
-				text = "Parasites"
-				format = left
-				vertical_alignment = center
-				#alwaysTransparent = yes
-			}
+			#instantTextBoxType = {
+			#	name = "job_class_name"
+			#	position = { x = 285 y = 5 }
+			#	font = "cg_16b"
+			#	maxWidth = 170
+			#	maxHeight = 16
+			#	text = "Parasites"
+			#	format = left
+			#	vertical_alignment = center
+			#	#alwaysTransparent = yes
+			#}
 			iconType = {
 				name = "job_icon"
 				quadTextureSprite = "GFX_job_unknown"
@@ -493,6 +493,12 @@ guiTypes = {
 			quadTextureSprite = "GFX_resettlement_left_arrow"
 			position = { x = 5 y = 5 }
 			scale = 0.73
+		}
+		iconType = {
+			name = "habitability_icon"
+			spriteType = "GFX_colonizability_shadow"
+			position = { x = 8 y = 8 }
+			scale = 0.8
 		}
 	}
 }

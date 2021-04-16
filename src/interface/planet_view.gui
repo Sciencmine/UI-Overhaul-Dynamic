@@ -83,13 +83,23 @@ guiTypes = {
 				name = "previous_planet"
 				quadTextureSprite = "GFX_button_left"
 				position = { x = 0 y = 0 }
+				shortcut = "CTRL+TAB"
 				clicksound = "click"
 				pdx_tooltip = "PREV"
+			}
+			buttonType = {
+				name = "previous_planet_extra_shortcut"
+				quadTextureSprite = "GFX_invisible"
+				position = { x = 0 y = 0 }
+				shortcut = "SHIFT+TAB"
+				clicksound = "click"
+				alwaysTransparent = yes				
 			}
 			buttonType = {
 				name = "next_planet"
 				quadTextureSprite = "GFX_button_right"
 				position = { x = 36 y = 0 }
+				shortcut = "TAB"
 				clicksound = "click"
 				pdx_tooltip = "NEXT"
 			}
@@ -317,6 +327,37 @@ guiTypes = {
 				alwaysTransparent = yes
 			}
 		}
+		# Terraforming
+		containerWindowType = {
+			name = "terraforming_in_progress"
+			size = { width = 140 height = 30 }
+			position = { x = 404 y = 201 }
+			background = {
+				name = "terraforming_bg"
+				spriteType = "GFX_dark_area_cut"
+			}
+			iconType = {
+				name = "terraform_current_planet"
+				position = { x = 3 y = 2 }
+				spriteType = "GFX_planet_type"
+				frame = 1
+				scale = 0.65
+				alwaysTransparent = yes
+			}
+			iconType = {
+				name = "terraform_finished_planet"
+				position = { x = 112 y = 2 }
+				spriteType = "GFX_planet_type"
+				frame = 1
+				scale = 0.65
+				alwaysTransparent = yes
+			}
+			iconType = {
+				name = "terraform_progress"
+				spriteType = "GFX_terraform_progressbar"
+				position = { x = 34 y = 7 }
+			}
+		}
 		# Colony Type
 		containerWindowType = {
 			name = "colony_type"
@@ -469,6 +510,25 @@ guiTypes = {
 				font = "cg_16b"
 				oversound = mouse_over
 				shortcut = "I"
+			}
+			containerWindowType = {
+				name = "colonizing_planet_window"
+				size = { width = 150 height = 220 }
+				position = { x = 0 y = 85 }
+				instantTextBoxType = {
+					name = "colonizing_planet_label"
+					font = "malgun_goth_24"
+					text = "COLONIZING_PLANET"
+					position = { x = 0 y = 20 }
+					maxWidth = 275
+					maxHeight = 20
+					format = center
+				}
+				iconType = {
+					name = "colonization_progress"
+					spriteType = "GFX_colonization_progressbar"
+					position = { x = 22 y = 50 }
+				}
 			}
 			# Planet Stability
 			containerWindowType = {
@@ -729,12 +789,78 @@ guiTypes = {
 			containerWindowType = {
 				name = "colonizable_planet_window"
 				position = { x = 0 y = 27 }
+				#<------------------------ PLANET FEATURES / DEPOSITS --------------------------->
+				# Planet Features
+				containerWindowType = {
+					name = "deposits_summary_window"
+					size = { width = 275 height = 40 }
+					position = { x = 10 y = 114 }
+					background = {
+						name = "background"
+						spriteType = "GFX_dark_area_cut"
+					}
+					buttonType = {
+						name = "deposits_button"
+						position = { x = 10 y = -3 }
+						spriteType = "GFX_ui_inspect_planet_features"
+						buttonFont = "cg_16b"
+						# text = "FEATURES"
+						font = "cg_16b"
+						oversound = mouse_over
+						pdx_tooltip = "DEPOSITS_TOOLTIP"
+						navLeft = "change"
+						shortcut = "K"
+					}
+					containerWindowType = {
+						name = "blocker_deposits_window"
+						size = { width = 100 height = 30 }
+						position = { x = 190 y = 10 }
+						iconType = {
+							name = "blocker_deposit_frame"
+							spriteType = "GFX_blocker_icon"
+							position = { x = -7 y = 0 }
+							scale = 1
+						}
+						instantTextBoxType = {
+							name = "blocker_deposit_num"
+							font = "cg_16b"
+							position = { x = 26 y = 1 }
+							text = "x5"
+							maxWidth = 35
+							maxHeight = 50
+							fixedSize = yes
+							format = left
+						}
+					}
+					# Rare Deposits Summary, shown when grid overflows
+					containerWindowType = {
+						name = "rare_deposits_window"
+						size = { width = 90 height = 30 }
+						position = { x = 100 y = 10 }
+						iconType = {
+							name = "blocker_deposit_frame"
+							spriteType = "GFX_resource_strategic_top_bar"
+							position = { x = 6 y = 0 }
+							scale = 1.1
+						}
+						instantTextBoxType = {
+							name = "blocker_deposit_num"
+							font = "cg_16b"
+							position = { x = 32 y = 1 }
+							text = "x5"
+							maxWidth = 35
+							maxHeight = 50
+							fixedSize = yes
+							format = left
+						}
+					}
+				}
 				#<---------------------------- DISTRICTS ----------------------------->
 				### Districts Container Window
 				containerWindowType = {
 					name = "districts_window"
-					size = { width = 275 height = 403 }
-					position = { x = 10 y = 115 }
+					size = { width = 275 height = 353 }
+					position = { x = 10 y = 165 }
 					clipping = yes
 					margin = { top = 2 bottom = 2 }
 					verticalScrollbar = "right_vertical_slider_thick"
@@ -742,31 +868,21 @@ guiTypes = {
 						name = "districts_window_background"
 						spriteType = "GFX_tiles_dark_area_cut_8"
 					}
-					# Districts
-					gridBoxType = {
-						name = "districts_grid_box"
-						position = { x = 2 y = 80 }
-						size = { width = 265 height = 742 }
-						format = UPPER_LEFT
-						slotsize = { width = 265 height = 53 }
-						add_horizontal = yes
-						max_slots_horizontal = 1
-					}
 					# Districts num
 					containerWindowType = {
 						name = "planet_num_districts"
 						size = { width = 70 height = 45 }
-						position = { x = 0 y = 40 }
+						position = { x = 0 y = 0 }
 						iconType = {
 							name = "num_districts_icon"
 							spriteType = "GFX_district_small"
-							position = { x = 10 y = 10 }
+							position = { x = 10 y = 5 }
 							tooltip_mode_enabled = yes
 						}
 						instantTextBoxType = {
 							name = "planet_districts_amount"
 							font = "cg_16b"
-							position = { x = 30 y = 15 }
+							position = { x = 30 y = 10 }
 							text = "10"
 							maxWidth = 30
 							maxHeight = 40
@@ -774,82 +890,31 @@ guiTypes = {
 							format = center
 						}
 					}
-					# Planet Features
-					containerWindowType = {
-						name = "deposits_summary_window"
-						size = { width = 260 height = 40 }
-						position = { x = 5 y = 5 }
-						background = {
-							name = "background"
-							spriteType = "GFX_tiles_dark_area_cut_8"
-						}
-						buttonType = {
-							name = "deposits_button"
-							position = { x = 10 y = 1 }
-							spriteType = "GFX_inspect_planet_features"
-							buttonFont = "cg_16b"
-							font = "cg_16b"							oversound = mouse_over
-							pdx_tooltip = "DEPOSITS_TOOLTIP"
-							navLeft = "change"
-							shortcut = "K"
-						}
-						containerWindowType = {
-							name = "blocker_deposits_window"
-							size = { width = 100 height = 30 }
-							position = { x = 190 y = 10 }
-							iconType = {
-								name = "blocker_deposit_frame"
-								spriteType = "GFX_blocker_icon"
-								position = { x = -7 y = 0 }
-								scale = 1
-							}
-							instantTextBoxType = {
-								name = "blocker_deposit_num"
-								font = "cg_16b"
-								position = { x = 26 y = 1 }
-								text = "x5"
-								maxWidth = 35
-								maxHeight = 50
-								fixedSize = yes
-								format = left							}
-						}
-						# Rare Deposits Summary, shown when grid overflows
-						containerWindowType = {
-							name = "rare_deposits_window"
-							size = { width = 90 height = 30 }
-							position = { x = 100 y = 10 }
-							iconType = {
-								name = "blocker_deposit_frame"
-								spriteType = "GFX_resource_strategic_top_bar"
-								position = { x = 6 y = 0 }
-								scale = 1.1
-							}
-							instantTextBoxType = {
-								name = "blocker_deposit_num"
-								font = "cg_16b"
-								position = { x = 32 y = 1 }
-								text = "x5"
-								maxWidth = 35
-								maxHeight = 50
-								fixedSize = yes
-								format = left							}
-						}
-					}
 					# Available District Cubes Container
 					containerWindowType = {
 						name = "available_districts_window"
 						size = { width = 200 height = 45 }
-						position = { x = 60 y = 40 }
+						position = { x = 60 y = 0 }
 						gridBoxType = {
 							name = "available_districts_grid_box"
 							size = { width = 200 height = 20 }
-							position = { x = 0 y = 15 }
+							position = { x = 0 y = 10 }
 							format = "UPPER_LEFT"
 							slotSize = { width = 10 height = 10 }
 							max_slots_horizontal = 20
 							max_slots_vertical = 2
 							add_horizontal = no
 						}
+					}
+					# Districts
+					gridBoxType = {
+						name = "districts_grid_box"
+						position = { x = 2 y = 40 }
+						size = { width = 265 height = 742 }
+						format = UPPER_LEFT
+						slotsize = { width = 265 height = 53 }
+						add_horizontal = yes
+						max_slots_horizontal = 1
 					}
 				}
 				containerWindowType = {
@@ -871,28 +936,28 @@ guiTypes = {
 						text_color_code = "L"
 						scrollbarType = "standardtext_slider_small"					}
 				}
-				containerWindowType = {
-					name = "colonizing_planet_window"
-					size = { width = 568 height = 44 }
-					position = { x = 296 y = 474 }
-					background = {
-						name = "planet_desc_background"
-						spriteType = "GFX_tiles_dark_area_cut_8"
-					}
-					iconType = {
-						name = "colonization_progress"
-						spriteType = "GFX_ui_progressbar_550"
-						position = { x = 9 y = 4 }
-					}
-					instantTextBoxType = {
-						name = "colonizing_planet_label"
-						font = "malgun_goth_24"
-						text = "COLONIZING_PLANET"
-						position = { x = 10 y = 9 }
-						maxWidth = 548
-						maxHeight = 20						format = center
-					}
-				}
+				#containerWindowType = {
+				#	name = "colonizing_planet_window"
+				#	size = { width = 568 height = 44 }
+				#	position = { x = 296 y = 474 }
+				#	background = {
+				#		name = "planet_desc_background"
+				#		spriteType = "GFX_tiles_dark_area_cut_8"
+				#	}
+				#	iconType = {
+				#		name = "colonization_progress"
+				#		spriteType = "GFX_ui_progressbar_550"
+				#		position = { x = 9 y = 4 }
+				#	}
+				#	instantTextBoxType = {
+				#		name = "colonizing_planet_label"
+				#		font = "malgun_goth_24"
+				#		text = "COLONIZING_PLANET"
+				#		position = { x = 10 y = 9 }
+				#		maxWidth = 548
+				#		maxHeight = 20				#		format = center
+				#	}
+				#}
 			}
 			containerWindowType = {
 				name = "terraforming_panel"
@@ -944,36 +1009,6 @@ guiTypes = {
 						maxHeight = 20
 						fixedSize = yes
 						format = left					}
-				}
-				containerWindowType = {
-					name = "terraforming_in_progress"
-					size = { width = 114 height = 30 }
-					position = { x = 151 y = 5 }
-					background = {
-						name = "terraforming_bg"
-						spriteType = "GFX_tiles_dark_area_cut_8"
-					}
-					iconType = {
-						name = "terraform_current_planet"
-						position = { x = 4 y = 2 }
-						spriteType = "GFX_planet_type"
-						frame = 1
-						scale = 0.65
-						alwaysTransparent = yes
-					}
-					iconType = {
-						name = "terraform_finished_planet"
-						position = { x = 85 y = 2 }
-						spriteType = "GFX_planet_type"
-						frame = 1
-						scale = 0.65
-						alwaysTransparent = yes
-					}
-					iconType = {
-						name = "terraform_progress"
-						spriteType = "GFX_building_progressbar"
-						position = { x = 31 y = 9 }
-					}
 				}
 			}
 			containerWindowType = {
@@ -1182,9 +1217,9 @@ guiTypes = {
 					instantTextBoxType = {
 						name = "trade_value_amount"
 						font = "malgun_goth_24"
-						position = { x = 30 y = 4 }
+						position = { x = 20 y = 4 }
 						text = "5"
-						maxWidth = 50
+						maxWidth = 70
 						maxHeight = 20
 						fixedSize = yes
 						format = center						alwaysTransparent = yes
@@ -3913,22 +3948,22 @@ guiTypes = {
 		# Passed 15 Cubes, Number Box is shown. Replaces the bottom 6 cubes.
 		containerWindowType = {
 			name = "planet_district_cap_container"
-			size = { width = 44 height = 28 }
-			position = { x = -5 y = -3 }
+			size = { width = 46 height = 28 }
+			position = { x = -3 y = -3 }
 			orientation = lower_right
 			origo = lower_right
 			iconType = {
 				name = "cap_background"
 				spriteType = "GFX_district_any_big"
-				position = { x = 3 y = 0 }
+				position = { x = 0 y = -10 }
 				scale = 1
 			}
 			instantTextBoxType = {
 				name = "num_districts_text"
 				font = "cg_16b"
-				position = { x = -2 y = 6 }
+				position = { x = 0 y = 6 }
 				text = "10"
-				maxWidth = 52
+				maxWidth = 44
 				maxHeight = 20
 				fixedSize = yes
 				format = center
@@ -3974,7 +4009,7 @@ guiTypes = {
 			text = "Deposit effects go here"
 			position = { x = 85 y = 25 }
 			maxWidth = 340
-			maxHeight = 32
+			maxHeight = 36
 			fixedSize = yes
 			format = left
 			alwaysTransparent = yes
@@ -4912,25 +4947,6 @@ guiTypes = {
 			spriteType = "GFX_building_ruined"
 			alwaysTransparent = yes
 		}
-		instantTextBoxType = {
-			name = "unlock_at_pops"
-			font = "cg_16b"
-			position = { x = -35 y = -20 }
-			orientation = center_down
-			text = "10"
-			maxWidth = @slotSize
-			maxHeight = 20
-			fixedSize = yes
-			format = center
-		}
-		iconType = {
-			name = "disabled_building"
-			spriteType = "GFX_disabled_building"
-			position = { x = -26 y = -25 }
-			orientation = lower_right
-			alwaysTransparent = yes
-			scale = 0.8
-		}
 		iconType = {
 			name = "progressbar"
 			spriteType = "GFX_ui_building_progressbar_68_10"
@@ -4958,6 +4974,14 @@ guiTypes = {
 			position = { x = 4 y = 5 }
 			clicksound = "queuing_building"
 			scale = 0.80
+		}
+		iconType = {
+			name = "disabled_building"
+			spriteType = "GFX_disabled_building"
+			position = { x = -26 y = -25 }
+			orientation = lower_right
+			alwaysTransparent = yes
+			scale = 0.8
 		}
 	}
 	containerWindowType = {

@@ -387,6 +387,15 @@ guiTypes = {
 			text_color_code = "G"
 			orientation = upper_right
 		}
+		buttonType = {
+			name = "auto_research"
+			quadTextureSprite = "GFX_button_automate"
+			position = { x = -39 y = 2 }
+			orientation = upper_right
+			scale = 1
+			oversound = "no_sound"
+			clicksound = "select_click"
+		}
 		containerWindowType = {
 			name = "leader_window"
 			size = { width = 202 height = 240 }

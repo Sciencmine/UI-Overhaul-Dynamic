@@ -18,7 +18,7 @@ guiTypes = {
 		containerWindowType = {
 			name = "start_screen_frame_bg"
 			position = { x = 7 y = 192 }
-			size = { width = 386 height = -7 }			background = {
+			size = { width = -7 height = -7 }			background = {
 				name = "start_screen_frame"
 				quadTextureSprite = "GFX_gov_mod_frame"
 				alwaysTransparent = yes

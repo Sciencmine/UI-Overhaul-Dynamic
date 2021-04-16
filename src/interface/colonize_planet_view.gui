@@ -262,6 +262,27 @@ guiTypes = {
 			fixedSize = yes
 			alwaysTransparent = yes
 		}
+		### CHECKBOX ONLY MAIN SPECIES ###
+		containerWindowType = {
+			name = "main_species_filter"
+			position = { x = 360 y = 44 }
+			checkboxType = {
+				name = "checked"
+				spriteType = "GFX_checkbox_20_20_01"
+				pdx_tooltip = "EXPANSION_PLANNER_ONLY_MAIN_SPECIES_DESC"
+			}
+			instantTextBoxType = {
+				name = "title"
+				font = "cg_16b"
+				maxWidth = 120
+				maxHeight = 30
+				position = { x = 35 y = 0 }
+				vertical_alignment = center
+				text_color_code = "E"
+				text = "EXPANSION_PLANNER_ONLY_MAIN_SPECIES"
+				pdx_tooltip = "EXPANSION_PLANNER_ONLY_MAIN_SPECIES_DESC"
+			}
+		}
 		### PLANET INFO ###
 		containerWindowType = {
 			name = "planet_portrait_window"
